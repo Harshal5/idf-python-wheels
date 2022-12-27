@@ -37,7 +37,9 @@ jobs:
       - name: Prepare download folder
         run: mkdir download
       - name: Install build dependencies
-        run: python3 -m pip install wheel
+        run: | 
+          python3 -m pip install wheel
+          brew install swig
       - name: Get python3 version
         run: python3 --version
       - name: Get branch name
@@ -50,7 +52,7 @@ jobs:
           fi
       - name: Build wheels for IDF ${{ env.IDF_branch }} branch
         shell: pwsh
-        run: .\Build-Wheels.ps1  -Branch ${{ env.IDF_branch }} -Arch "${{ matrix.ARCH }}" -CompileWheels @("greenlet==1.0.0", "gevent==1.5.0", "cryptography")
+        run: .\Build-Wheels.ps1  -Branch ${{ env.IDF_branch }} -Arch "${{ matrix.ARCH }}" -CompileWheels @("greenlet==1.0.0", "gevent==1.5.0", "cryptography", "PyKCS11")
       - name: Test wheels by installation
         shell: pwsh
         run: .\Test-Wheels.ps1 -Branch ${{ env.IDF_branch }} -Arch "${{ matrix.ARCH }}"

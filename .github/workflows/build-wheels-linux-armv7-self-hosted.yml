@@ -31,7 +31,7 @@ jobs:
       - name: Install build dependencies
         run: |
           apt update
-          apt-get install libtiff5 libjpeg-dev libopenjp2-7 cmake libdbus-1-dev -y
+          apt-get install libtiff5 libjpeg-dev libopenjp2-7 cmake libdbus-1-dev swig -y
           pyenv global ${{ matrix.python-version }}
           python -m pip install wheel
           pip3 install wheel
@@ -51,7 +51,7 @@ jobs:
           python -m pip install --upgrade pip
           $env:PATH+=":/root/.cargo/bin"
           rustc --version
-          .\Build-Wheels.ps1 -Branch ${{ env.IDF_branch }} -CompileWheels @("greenlet==1.0.0", "gevent==1.5.0", "cryptography")
+          .\Build-Wheels.ps1 -Branch ${{ env.IDF_branch }} -CompileWheels @("greenlet==1.0.0", "gevent==1.5.0", "cryptography", "PyKCS11")
       - name: Copy cached wheels
         run: cp -u `pip cache list --format=abspath` download
       - name: Test wheels by installation
