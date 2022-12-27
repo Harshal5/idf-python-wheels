@@ -39,7 +39,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt update
-          sudo apt-get install cmake libdbus-1-dev swig -y
+          sudo apt-get install cmake libdbus-1-dev -y
       - name: Install build dependencies
         run: python3 -m pip install wheel
       - name: Get python3 version

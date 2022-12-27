@@ -31,8 +31,6 @@ jobs:
           pyenv global ${{ matrix.python-version }}
           python -m pip install wheel
           pip3 install wheel
-          apt update
-          apt-get install swig
       - name: Get branch name
         run: |
           INPUT=${{ github.event.inputs.IDF_branch }}
